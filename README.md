@@ -1,5 +1,5 @@
 # MQLArticles 
-Una colección completa de implementaciones en MQL5 para gestión de riesgo y posiciones en trading algorítmico.
+Una colección completa de implementaciones en MQL5 para gestión de riesgo y posiciones en trading algorítmico.                                                                                                                                          
 Este repositorio contiene el código fuente de artículos publicados en MQL5.com por nique_372.
 
 
