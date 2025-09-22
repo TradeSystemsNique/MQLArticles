@@ -44,9 +44,8 @@ Este repositorio contiene el código fuente de artículos publicados en MQL5.com
 
 ### Metodos de Instalación
 - Clonar el repositorio git en shared proyects a travez del cmd.
-- Escribirme por privado en MQL5 chats, para que te agrege como colaborador (solo lectura) haciendo esto te aparecera el repositorio en tu shared
-proyects automaticamente
-- Fork al repositorio    
+- Escribirme por privado en MQL5 chats, para que te agrege como colaborador con tu nickname de MQL5 (solo lectura) haciendo que te aparecera el repositorio en tu carpeta sharedproyects automaticamente.
+- Fork al repositorio.    
 
 
 
