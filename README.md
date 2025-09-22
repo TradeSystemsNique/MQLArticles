@@ -8,7 +8,8 @@ Este repositorio contiene el código fuente de artículos publicados en MQL5.com
 ```
 ├── RM/                    # Módulos de Gestión de Riesgo (Risk Management)
 ├── Utils/                 # Utilidades y herramientas auxiliares
-└── PosManagement/         # Modulo para la gestion de posiciones (Breakeven)
+├── PosManagement/         # Modulo para la gestion de posiciones (Breakeven)
+├── Examples/              # Ejemplos del uso de la libreria RiskManagement y PosManagement     
 ```
 
 ## Serie de Artículos Implementados
