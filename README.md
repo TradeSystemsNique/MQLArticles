@@ -10,7 +10,7 @@ Este repositorio contiene el código fuente de artículos publicados en MQL5.com
 ├── Utils/                 # Utilidades y herramientas auxiliares
 ├── PosManagement/         # Modulo para la gestion de posiciones (Breakeven)
 ├── Examples/              # Ejemplos del uso de la libreria RiskManagement  
-├── OrderBlock/            # Implementacion del indicador de order block y el ea de order blocks  
+├── OrderBlock/            # Implementacion del indicador y asesor experto de order blocks  
 ```
 
 ## Serie de Artículos Implementados
