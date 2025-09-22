@@ -69,8 +69,8 @@ private:
 
   CLabel             m_label_entry_price;           // Label por entry price
   CEdit              m_edit_entry_price;            // Edit control for entering entry price
-  CButton            m_buttom_entry_bid;
-  CButton            m_buttom_entry_ask;
+  CButton            m_buttom_entry_bid;            // Button that sets the entry price in the bid
+  CButton            m_buttom_entry_ask;            // Button that sets the entry price in the ask
 
   //--- Labels and controls for order type and lot size
   CLabel             m_label_get_lote;              // Label for get lot size
@@ -98,7 +98,7 @@ private:
   long               sl;                           // Stores stop loss value entered by the user
   ENUM_ORDER_TYPE    order_type_get_sl;            // Stores the selected order type for stop loss
   ENUM_ORDER_TYPE    order_type_get_lot;           // Stores the selected order type for lot size
-  double             entry_price; //
+  double             entry_price;                  // Entry price selected by the user
 
 
   //--- create labels and buttons
