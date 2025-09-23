@@ -577,7 +577,7 @@ CRiskManagementPanel g_risk_panel;
 int OnInit()
  {
 //--- create application dialog
-  if(!g_risk_panel.Create(0, "Test Risk Management", 0, 40, 40, 380, 400))
+  if(!g_risk_panel.Create(0, "Test Risk Management", 0, 40, 40, 380, 420))
     return(INIT_FAILED);
 //--- run application
   g_risk_panel.Run();
