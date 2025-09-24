@@ -52,8 +52,14 @@ enum ENUM_LOTE_TYPE //lot type
 //--- Enumeration to define the types of calculation of the value of maximum profits and losses
 enum ENUM_RISK_CALCULATION_MODE
  {
-  money, //Money
+  money = 0, //Money
   percentage //Percentage %
+ };
+
+const string RiskCalcModeToString[2]
+ {
+  "Money",
+  "Percentage"
  };
 
 //--- Enumeration to define the type of risk management
