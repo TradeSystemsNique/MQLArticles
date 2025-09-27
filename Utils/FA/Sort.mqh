@@ -9,6 +9,8 @@
 
  
 //+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
 template <typename S, typename CompareFuncionMayor>
 void SortArrayDescendente(S* &array[], int left, int right, CompareFuncionMayor mayor, MqlParam &params[])
  {
@@ -16,7 +18,7 @@ void SortArrayDescendente(S* &array[], int left, int right, CompareFuncionMayor 
     return;
 
   const int pivotIndex = (left + right) >> 1;
-  const S pivotValue = array[pivotIndex];
+  const S* pivotValue = array[pivotIndex];
   int i = left, j = right;
   while(i <= j)
    {
@@ -26,7 +28,7 @@ void SortArrayDescendente(S* &array[], int left, int right, CompareFuncionMayor 
       j--;
     if(i <= j)
      {
-      S temp = array[i];
+      S* temp = array[i];
       array[i] = array[j];
       array[j] = temp;
       i++;
@@ -45,7 +47,7 @@ void SortArrayAscendente(S* &array[], int left, int right, CompareFuncionMayor m
     return;
 
   const int pivotIndex = (left + right) >> 1;
-  const S pivotValue = array[pivotIndex];
+  const S* pivotValue = array[pivotIndex];
   int i = left, j = right;
   while(i <= j)
    {
@@ -55,7 +57,7 @@ void SortArrayAscendente(S* &array[], int left, int right, CompareFuncionMayor m
       j--;
     if(i <= j)
      {
-      S temp = array[i];
+      S* temp = array[i];
       array[i] = array[j];
       array[j] = temp;
       i++;
@@ -66,6 +68,8 @@ void SortArrayAscendente(S* &array[], int left, int right, CompareFuncionMayor m
   SortArrayAscendente(array, i, right, mayor, params);
  }
 
+//+------------------------------------------------------------------+
+//|                                                                  |
 //+------------------------------------------------------------------+
 template <typename S, typename CompareFuncionMayor>
 void SortArrayDescendente(S &array[], int left, int right, CompareFuncionMayor mayor, MqlParam &params[])
