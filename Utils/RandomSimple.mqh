@@ -49,6 +49,9 @@ public:
   //- Random bool
   bool               RandomBool();
 
+  //- Random string
+  string             RandomString(int lenth, const string &chars[]);
+
   //--- Select
   template <typename T>
   T                  RandomSelect(const T &arr[]);
@@ -208,6 +211,38 @@ float CRandomSimple::RandomFloat(float start, float stop)
   float rand_val = (float)MathRand() / 32767.0f;
   return start + rand_val * (stop - start);
  }
+
+
+//+------------------------------------------------------------------+
+//| RandomBool                                                       |
+//+------------------------------------------------------------------+
+bool CRandomSimple::RandomBool()
+ {
+  return (MathRand() % 2) == 1;
+ }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+string CRandomSimple::RandomString(int lenth, const string &chars[])
+ {
+  const int size_chars = ArraySize(chars);
+  string str = "";
+
+#ifdef RANDOM_SIMPLE_STRICT
+  if(lenth <= 0 || size_chars < 1)
+    return str;
+
+#endif
+  for(int i = 0; i < lenth; i++)
+   {
+    const int idx = MathRand() % size_chars;
+    str += chars[idx];
+   }
+  return str;
+ }
+
+
 //+------------------------------------------------------------------+
 //| RandomSelect - selecciona elemento aleatorio del array           |
 //+------------------------------------------------------------------+
@@ -308,13 +343,5 @@ void CRandomSimple::RandomSelectMultiple(const T &arr[], T &out[], int elements_
     indices[randIdx] = indices[size - i - 1];
     indices[size - i - 1] = temp;
    }
- }
-
-//+------------------------------------------------------------------+
-//| RandomBool                                                       |
-//+------------------------------------------------------------------+
-bool CRandomSimple::RandomBool()
- {
-  return (MathRand() % 2) == 1;
  }
 //+------------------------------------------------------------------+
