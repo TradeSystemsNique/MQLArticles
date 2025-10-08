@@ -5,7 +5,7 @@ Este repositorio contiene el código fuente de artículos publicados en MQL5.com
 
 ## Contenido del Repositorio
 
-### 📁 Estructura del Proyecto
+### Estructura del Proyecto
 
 | Carpeta | Archivos | Descripción |
 |---------|----------|-------------|
