@@ -43,7 +43,7 @@ This repository contains the source code from articles published on MQL5.com by 
 ### Position Management - Partial Closes
 | Focus | Article Link |
 |-------|--------------------|
-| **Implementation of partial closes in MQL5** | [[ES]](https://www.mql5.com/es/articles/19682) |
+| Implementation of partial closes in MQL5 | [[ES]](https://www.mql5.com/es/articles/19682) |
 
 
 ### Order Block Indicator
