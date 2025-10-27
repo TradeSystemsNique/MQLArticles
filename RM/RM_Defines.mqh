@@ -126,74 +126,69 @@ enum ENUM_TYPE_LOSS_PROFIT
 //|                      Structures                                  |
 //+------------------------------------------------------------------+
 //--- Positions
-struct pack(sizeof(double)) Position //quitar pack si aumenta a+4bytes
+struct pack(sizeof(double)) Position //remove pack if it increases to +4bytes
  {
   ulong              ticket; //position ticket
-  ulong              magic; //numero magico con el que se abrio
-  double             profit; //ultimo profit registrado
-  double             open_price; //precio de apertura
-  double             firt_sl; //stop loss con el que se abrio la operacion, sl original (pongo first por que se puede modificar el StopLoss ya sea por el usuario o por un bot)
-  double             first_tp; //primer tp, original
-  datetime           open_time; //tiempo de apertura
+  ulong              magic; //magic number with which it was opened
+  double             profit; //last recorded profit
+  double             open_price; //opening price
+  double             firt_sl; //stop loss with which the position was opened, original sl (I put first because the StopLoss can be modified either by the user or by a bot)
+  double             first_tp; //first tp, original
+  datetime           open_time; //opening time
   ENUM_POSITION_TYPE type; //position type
  };
-
-
-
-//--- Orden
+ 
+//--- Order
 struct pack(8) ROnOrderDelete
  {
-  ulong              order_magic; //numjero mafgico de la orden
-  ulong              order_ticket; //ticket de la orden
-  ENUM_ORDER_TYPE    order_type; //tipo de orden
-  ENUM_ORDER_STATE   order_state; //stado de la orden
+  ulong              order_magic; //magic number of the order
+  ulong              order_ticket; //order ticket
+  ENUM_ORDER_TYPE    order_type; //order type
+  ENUM_ORDER_STATE   order_state; //order state
  };
-
-
+ 
 //---
 struct ModifierOnOpenCloseStruct
  {
-  //--- Info del ultimo deal
-  ulong              deal_ticket;
-  double             deal_profit;
-  ENUM_DEAL_REASON   deal_reason;
-  ENUM_DEAL_ENTRY    deal_entry_type;
-
-  //--- Profit del numnero magico
-  double             profit_diario;
-  double             profit_semanal;
-  double             profit_total;
-  double             profit_mensual;
-
-
-  //--- Info de la posicion abierta o de la posicion que se cerro
+  //--- Last deal info
+  ulong              deal_ticket;     // Deal ticket
+  double             deal_profit;     // Deal profit
+  ENUM_DEAL_REASON   deal_reason;     // Deal reason
+  ENUM_DEAL_ENTRY    deal_entry_type; // Deal entry type
+  
+  //--- Magic number profit
+  double             profit_diario;  // Daily profit regarding the magic number of (RiskManagement)
+  double             profit_semanal; // Weekly profit regarding the magic number of (RiskManagement)
+  double             profit_total;   // Total profit regarding the magic number of (RiskManagement)
+  double             profit_mensual; // Monthly profit regarding the magic number of (RiskManagement)
+ 
+  //--- Open position info or closed position info
   Position           position;
  };
-
-
+ 
 //---
 struct ROnOpenClosePosition
  {
-  ulong              deal_ticket;
-  double             deal_profit;
-  ENUM_DEAL_REASON   deal_reason;
-  ENUM_DEAL_ENTRY    deal_entry_type;
-
-  //--- Cuenta
-  double             account_balance;
-  double             account_profit_diario;
-  double             account_profit_semanal;
-  double             account_profit_total;
-  double             account_profit_mensual;
-
-  //--- Posicion
+  //--- Position
   Position           position;
-
+  
+  //--- Deal
+  ulong              deal_ticket; // Ticket
+  double             deal_profit; // Profit
+  ENUM_DEAL_REASON   deal_reason; // Reason
+  ENUM_DEAL_ENTRY    deal_entry_type; // Entry type
+  
+  //--- Account
+  double             account_balance;        // Account balance
+  double             account_profit_diario;  // Account daily profit
+  double             account_profit_semanal; // Account weekly profit
+  double             account_profit_total;   // Account total profit
+  double             account_profit_mensual; // Account monthly profit
+  
   //--- Extra
-  ulong              magic_number_closed;
+  ulong              magic_number_closed; // Magic number at position close
  };
-
-
+ 
 //--- Loss/Profit
 struct Loss_Profit
  {
@@ -202,21 +197,21 @@ struct Loss_Profit
   ENUM_RISK_CALCULATION_MODE mode_calculation_risk; //risk calculation method
   ENUM_APPLIED_PERCENTAGES percentage_applied_to; //percentage applied to
  };
-
-//--- Dynamic gmlpo/ Riesgo por operacion dinamico
+ 
+//--- Dynamic gmlpo/ Dynamic risk per operation
 struct Dynamic_LossProfit
  {
   double             balance_to_activate_the_risk[];
   double             risk_to_be_adjusted[];
  };
-
+ 
 //---
 struct RiskParams
  {
   ENUM_MODE_RISK_MANAGEMENT mode;
   MqlParam           params[];
  };
-
+ 
 //---
 struct ModfierInitInfo
  {
@@ -265,4 +260,5 @@ const int OrdensToFlagArray[9] =
 2025.08.06 16:50:41.989 GetID (XAUUSD,M1) ORDER_TYPE_CLOSE_BY = 8
 */
 //+------------------------------------------------------------------+
-#endif 
+#endif
+//+------------------------------------------------------------------+
