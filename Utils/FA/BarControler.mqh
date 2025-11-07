@@ -18,33 +18,31 @@
 class CBarControler
  {
 private:
-  string             symbol;
+  const string       symbol;
   datetime           next_time;
   datetime           prev_time;
-  ENUM_TIMEFRAMES    bar_timeframe;
-  int                period_in_seconds;
+  const ENUM_TIMEFRAMES    bar_timeframe;
+  const int          period_in_seconds;
 
 public:
                      CBarControler(ENUM_TIMEFRAMES _timeframe, string _symbol);
   inline int         PeriodsInSeconds()const { return  period_in_seconds; }
   inline             ENUM_TIMEFRAMES Timeframe() const { return bar_timeframe; }
-  inline bool        IsNewBar(datetime curr_time);
+  bool               IsNewBar(datetime curr_time);
   inline datetime    GetNextPrevBarTime() const { return prev_time; }
  };
 //+------------------------------------------------------------------+
 CBarControler::CBarControler(ENUM_TIMEFRAMES _timeframe, string _symbol)
-  : next_time(wrong_datetime), prev_time(wrong_datetime), period_in_seconds(PeriodSeconds(_timeframe))
+  : next_time(wrong_datetime), prev_time(wrong_datetime), period_in_seconds(PeriodSeconds(_timeframe)), symbol(_symbol), bar_timeframe(_timeframe)
  {
-  this.bar_timeframe = _timeframe;
-  this.symbol = _symbol;
  }
 //+------------------------------------------------------------------+
-inline bool CBarControler::IsNewBar(datetime curr_time)
+bool CBarControler::IsNewBar(datetime curr_time)
  {
   if(curr_time >= next_time)
    {
     prev_time = next_time;
-    this.next_time =  iTime(symbol, bar_timeframe, 0) + (this.bar_timeframe == PERIOD_MN1 ? SecondsInMonth(curr_time) : period_in_seconds);
+    next_time =  iTime(symbol, bar_timeframe, 0) + (bar_timeframe == PERIOD_MN1 ? SecondsInMonth(curr_time) : period_in_seconds);
     return true;
    }
   return false;
@@ -57,24 +55,21 @@ inline bool CBarControler::IsNewBar(datetime curr_time)
 class CBarControlerFast
  {
 private:
-  string             symbol;
+  const string       symbol;
   datetime           next_time;
-  ENUM_TIMEFRAMES    bar_timeframe;
-  int                period_in_seconds;
-  bool               is_mn1;
+  const ENUM_TIMEFRAMES    bar_timeframe;
+  const int          period_in_seconds;
+  const bool         is_mn1;
 
 public:
                      CBarControlerFast(ENUM_TIMEFRAMES _timeframe, string _symbol);
   inline ENUM_TIMEFRAMES Timeframe() const { return bar_timeframe; }
-  inline bool        IsNewBar(datetime curr_time);
+  bool               IsNewBar(datetime curr_time);
  };
 //+------------------------------------------------------------------+
 CBarControlerFast::CBarControlerFast(ENUM_TIMEFRAMES _timeframe, string _symbol)
-  : next_time(wrong_datetime), period_in_seconds(PeriodSeconds(_timeframe))
+  : next_time(wrong_datetime), period_in_seconds(PeriodSeconds(_timeframe)), bar_timeframe(_timeframe), symbol(_symbol), is_mn1((_timeframe == PERIOD_MN1))
  {
-  bar_timeframe = _timeframe;
-  symbol = _symbol;
-  is_mn1 = _timeframe == PERIOD_MN1;
  }
 //+------------------------------------------------------------------+
 bool CBarControlerFast::IsNewBar(datetime curr_time)
@@ -87,4 +82,5 @@ bool CBarControlerFast::IsNewBar(datetime curr_time)
   return false;
  }
 
-#endif 
+#endif
+//+------------------------------------------------------------------+
