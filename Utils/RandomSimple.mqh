@@ -7,7 +7,12 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
+#ifndef MQLARTICLES_UTILS_RANDOMSIMPLE_MQH
+#define MQLARTICLES_UTILS_RANDOMSIMPLE_MQH
 
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
 //#define RANDOM_SIMPLE_STRICT
 
 //+------------------------------------------------------------------+
@@ -345,3 +350,4 @@ void CRandomSimple::RandomSelectMultiple(const T &arr[], T &out[], int elements_
    }
  }
 //+------------------------------------------------------------------+
+#endif // MQLARTICLES_UTILS_RANDOMSIMPLE_MQH

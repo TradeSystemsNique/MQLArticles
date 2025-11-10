@@ -7,8 +7,8 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
-#ifndef UTILS_FA_BAR_CONTROLER_MQH
-#define UTILS_FA_BAR_CONTROLER_MQH
+#ifndef MQLARTICLES_UTILS_FA_BARCONTROLER_MQH
+#define MQLARTICLES_UTILS_FA_BARCONTROLER_MQH
 
 #include "FuncionesBases.mqh"
 
@@ -82,5 +82,5 @@ bool CBarControlerFast::IsNewBar(datetime curr_time)
   return false;
  }
 
-#endif
+#endif // MQLARTICLES_UTILS_FA_BARCONTROLER_MQH
 //+------------------------------------------------------------------+

@@ -7,7 +7,9 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
- 
+#ifndef MQLARTICLES_UTILS_FA_SORT_MQH
+#define MQLARTICLES_UTILS_FA_SORT_MQH
+
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
@@ -22,7 +24,7 @@ void SortArrayDescendente(S* &array[], int left, int right, CompareFuncionMayor 
   int i = left, j = right;
   while(i <= j)
    {
-    while(mayor(params, array[i], pivotValue)) // array[i] > es mayor pivot 
+    while(mayor(params, array[i], pivotValue)) // array[i] > es mayor pivot
       i++;
     while(mayor(params, pivotValue, array[j]))
       j--;
@@ -82,7 +84,7 @@ void SortArrayDescendente(S &array[], int left, int right, CompareFuncionMayor m
   int i = left, j = right;
   while(i <= j)
    {
-    while(mayor(params, array[i], pivotValue)) // array[i] > es mayor pivot 
+    while(mayor(params, array[i], pivotValue)) // array[i] > es mayor pivot
       i++;
     while(mayor(params, pivotValue, array[j]))
       j--;
@@ -128,3 +130,4 @@ void SortArrayAscendente(S &array[], int left, int right, CompareFuncionMayor ma
   SortArrayAscendente(array, i, right, mayor, params);
  }
 //+------------------------------------------------------------------+
+#endif // MQLARTICLES_UTILS_FA_SORT_MQH

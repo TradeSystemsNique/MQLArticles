@@ -7,6 +7,9 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
+#ifndef MQLARTICLES_UTILS_CUSTOMOPTIMIZATION_MQH
+#define MQLARTICLES_UTILS_CUSTOMOPTIMIZATION_MQH
+
 #include "Funciones Array.mqh"
 
 //+------------------------------------------------------------------+
@@ -104,3 +107,4 @@ double CCustomCriteria_FuncionMinDdAndMaxBalance()
   return gross / dd;
  }
 //+------------------------------------------------------------------+
+#endif // MQLARTICLES_UTILS_CUSTOMOPTIMIZATION_MQH
