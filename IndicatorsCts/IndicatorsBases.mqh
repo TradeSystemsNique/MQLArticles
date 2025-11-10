@@ -7,8 +7,8 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
-#ifndef MQL_ARTICLES_INDICATORS_CTS_INDICATORS_BASES_MQH
-#define MQL_ARTICLES_INDICATORS_CTS_INDICATORS_BASES_MQH
+#ifndef MQLARTICLES_INDICATORSCTS_INDICATORSBASES_MQH
+#define MQLARTICLES_INDICATORSCTS_INDICATORSBASES_MQH
 
 
 //+------------------------------------------------------------------+
@@ -55,13 +55,13 @@ public:
   inline bool        Realese()       const { return m_realese;   }
 
   //---
-  inline void        Realese(bool realese)    { m_realese = realese; }
+  inline void        Realese(bool realese) { m_realese = realese; }
   inline void        SetAsSeries(bool series);
 
   //---
-  inline void        GetData(double &out[], int buffer_num) const { ArrayCopy(out, m_data[buffer_num].data); }
-  inline int         Size(int buffer_num) const { return ArraySize(m_data[buffer_num].data); }
-  __forceinline double GetValue(int index, int buffer_num = 0) { return m_data[buffer_num].data[index]; }
+  inline void        GetData(double &out[], int buffer_num)    const  { ArrayCopy(out, m_data[buffer_num].data);   }
+  inline int         Size(int buffer_num)                      const  { return ArraySize(m_data[buffer_num].data); }
+  inline double GetValue(int index, int buffer_num = 0)        const  { return m_data[buffer_num].data[index];     }
 
   //---
   inline bool        CopyData(int start, int count, int buffer_num);
@@ -394,5 +394,5 @@ bool CiVwapChange::Create(ENUM_TIMEFRAMES timeframe, string symbol, VWAP_Period 
 // Buffer[1] = sell
   return CiIndicatorSimple::Create(m_handle, series, 2);
  }
-#endif
+#endif // MQLARTICLES_INDICATORSCTS_INDICATORSBASES_MQH
 //+------------------------------------------------------------------+
