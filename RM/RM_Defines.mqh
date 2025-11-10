@@ -7,8 +7,8 @@
 #property link      "https://www.mql5.com"
 #property strict
 
-#ifndef RISK_RM_DEFINES_MQH
-#define RISK_RM_DEFINES_MQH
+#ifndef MQLARTICLES_RM_RDEFINES_MQH
+#define MQLARTICLES_RM_RDEFINES_MQH
 
 //+------------------------------------------------------------------+
 //|                        Defines                                   |
@@ -260,5 +260,5 @@ const int OrdensToFlagArray[9] =
 2025.08.06 16:50:41.989 GetID (XAUUSD,M1) ORDER_TYPE_CLOSE_BY = 8
 */
 //+------------------------------------------------------------------+
-#endif
+#endif // MQLARTICLES_RM_RDEFINES_MQH
 //+------------------------------------------------------------------+

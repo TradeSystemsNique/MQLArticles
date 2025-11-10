@@ -8,8 +8,8 @@
 #property strict
 
 
-#ifndef ORDER_GESTOR_MQH
-#define ORDER_GESTOR_MQH
+#ifndef MQLARTICLES_RM_ORDERGESTOR_MQH
+#define MQLARTICLES_RM_ORDERGESTOR_MQH
 
 #include "RM_Functions.mqh"
 
@@ -89,5 +89,5 @@ bool COrderGestor::Add(ulong order_ticket)
   total_ordenes++;
   return true;
  }
-#endif
+#endif // MQLARTICLES_RM_ORDERGESTOR_MQH
 //+------------------------------------------------------------------+
