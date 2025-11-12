@@ -7,8 +7,8 @@
 #property link      "https://www.mql5.com/es/users/nique_372/news"
 #property strict
 
-#ifndef MQLARTICLES_POSMGMT_CONDITIONALPARTIALS_DEFINES_MQH
-#define MQLARTICLES_POSMGMT_CONDITIONALPARTIALS_DEFINES_MQH
+#ifndef MQLARTICLES_POSMGMT_CONDPARTIALS_BASE_DEFINES_MQH
+#define MQLARTICLES_POSMGMT_CONDPARTIALS_BASE_DEFINES_MQH
 
 //+------------------------------------------------------------------+
 //| Includes                                                         |
@@ -103,5 +103,16 @@ struct ConditionalPartialTrackedPosition
   ENUM_POSITION_TYPE type;
   int                next_index_to_close;
  };
+ 
+
 //+------------------------------------------------------------------+
-#endif 
+//| Enums                                                            |
+//+------------------------------------------------------------------+
+enum ENUM_TYPE_CONDITIONAL_PARTIAL_CLASS
+  {
+   CONDITIONAL_PARTIAL_CLASS_TYPE_BASE = 0,     // Default conditional partial closures
+   CONDITIONAL_PARTIAL_CLASS_TYPE_CONSTANT = 1  // Constant conditional partial closures
+  };
+ 
+//+------------------------------------------------------------------+
+#endif // MQLARTICLES_POSMGMT_CONDPARTIALS_BASE_DEFINES_MQH
