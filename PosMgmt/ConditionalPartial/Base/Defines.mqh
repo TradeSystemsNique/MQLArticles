@@ -11,7 +11,7 @@
 #define MQLARTICLES_POSMGMT_CONDPARTIALS_BASE_DEFINES_MQH
 
 //+------------------------------------------------------------------+
-//| Includes                                                         |
+//| Include                                                          |
 //+------------------------------------------------------------------+
 #include  "..\\..\\..\\RM\\RiskManagement.mqh"
 
