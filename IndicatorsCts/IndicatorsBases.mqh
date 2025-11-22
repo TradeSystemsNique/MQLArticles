@@ -41,29 +41,36 @@ public:
                      CiIndicatorSimple();
                     ~CiIndicatorSimple();
 
-  //---
+  //--- Create
   bool               Create(int handle, bool series, int buffers_num);
 
-  //---
+  //--- Clean
   inline void        CleanData();
 
-  //---
-  inline int         Handle()        const { return m_handle;    }
-  inline string      Name()          const { return m_name;      }
-  inline ENUM_TIMEFRAMES Timeframe() const { return m_timeframe; }
-  inline string      Simbolo()       const { return m_symbol;    }
-  inline bool        Realese()       const { return m_realese;   }
+  //--- Getters
+  inline int         Handle()        const { return m_handle;                  }
+  inline string      Name()          const { return m_name;                    }
+  inline ENUM_TIMEFRAMES Timeframe() const { return m_timeframe;               }
+  inline string      Symbol()        const { return m_symbol;                  }
+  inline bool        Realese()       const { return m_realese;                 }
+  inline bool        HandleIsValid() const {return m_handle != INVALID_HANDLE; }
 
-  //---
+  //--- Utils
   inline void        Realese(bool realese) { m_realese = realese; }
   inline void        SetAsSeries(bool series);
 
-  //---
-  inline void        GetData(double &out[], int buffer_num)    const  { ArrayCopy(out, m_data[buffer_num].data);   }
-  inline int         Size(int buffer_num)                      const  { return ArraySize(m_data[buffer_num].data); }
-  inline double GetValue(int index, int buffer_num = 0)        const  { return m_data[buffer_num].data[index];     }
+  //--- Data
+  // Get size
+  __forceinline int  Size(int buffer_num) const { return ::ArraySize(m_data[buffer_num].data); }
 
-  //---
+  // Get data
+  inline void        GetData(double &out[], int buffer_num) const { ::ArrayCopy(out, m_data[buffer_num].data); }
+  vector             GetData(int buffer_num) const;
+
+  // Get value
+  inline double      GetValue(int index, int buffer_num = 0) const { return m_data[buffer_num].data[index];     }
+
+  //--- Copy data to internal
   inline bool        CopyData(int start, int count, int buffer_num);
  };
 
@@ -73,7 +80,7 @@ public:
 CiIndicatorSimple::CiIndicatorSimple()
   : m_timeframe(WRONG_VALUE), m_symbol(NULL), m_handle(INVALID_HANDLE), m_realese(true)
  {
-  ArrayResize(m_data, 0);
+  ::ArrayResize(m_data, 0);
  }
 
 //+------------------------------------------------------------------+
@@ -81,7 +88,7 @@ CiIndicatorSimple::~CiIndicatorSimple()
  {
   if(m_realese && m_handle != INVALID_HANDLE)
    {
-    IndicatorRelease(m_handle);
+    ::IndicatorRelease(m_handle);
    }
  }
 
@@ -90,10 +97,10 @@ CiIndicatorSimple::~CiIndicatorSimple()
 //+------------------------------------------------------------------+
 inline bool CiIndicatorSimple::CopyData(int start, int count, int buffer_num)
  {
-  ResetLastError();
-  if(!CopyBuffer(m_handle, buffer_num, start, count, m_data[buffer_num].data))
+  ::ResetLastError();
+  if(!::CopyBuffer(m_handle, buffer_num, start, count, m_data[buffer_num].data))
    {
-    LogError(StringFormat("Error copying data from %d, total %d", start, count), FUNCION_ACTUAL);
+    LogError(::StringFormat("Error copying data from %d, total %d", start, count), FUNCION_ACTUAL);
     return false;
    }
   return true;
@@ -104,15 +111,15 @@ inline bool CiIndicatorSimple::CopyData(int start, int count, int buffer_num)
 //+------------------------------------------------------------------+
 bool CiIndicatorSimple::Create(int handle, bool series, int buffers_num)
  {
-  this.m_handle = handle;
-  if(this.m_handle == INVALID_HANDLE)
+  m_handle = handle;
+  if(m_handle == INVALID_HANDLE)
    {
-    LogError(StringFormat("Error creating indicator %s, invalid handle", m_name), FUNCION_ACTUAL);
+    LogError(::StringFormat("Error creating indicator %s, invalid handle", m_name), FUNCION_ACTUAL);
     return false;
    }
 
 //---
-  ArrayResize(m_data, buffers_num);
+  ::ArrayResize(m_data, buffers_num);
 
 //---
   if(series)
@@ -125,7 +132,7 @@ bool CiIndicatorSimple::Create(int handle, bool series, int buffers_num)
 //+------------------------------------------------------------------+
 inline void CiIndicatorSimple::CleanData(void)
  {
-  ArrayFree(m_data);
+  ::ArrayFree(m_data);
  }
 
 //+------------------------------------------------------------------+
@@ -133,9 +140,26 @@ inline void CiIndicatorSimple::CleanData(void)
 //+------------------------------------------------------------------+
 inline void CiIndicatorSimple::SetAsSeries(bool series)
  {
-  for(int i = 0; i < ArraySize(m_data); i++)
-    ArraySetAsSeries(m_data[i].data, series);
+  for(int i = 0; i < ::ArraySize(m_data); i++)
+    ::ArraySetAsSeries(m_data[i].data, series);
  }
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+vector CiIndicatorSimple::GetData(int buffer_num) const
+ {
+//---
+  const int s = Size(buffer_num);
+  vector v = {};
+  v.Assign(m_data[buffer_num].data);
+//---
+  return v;
+ }
+
+
+
+
 
 
 //+------------------------------------------------------------------+
@@ -152,12 +176,12 @@ bool CiRsi::Create(ENUM_TIMEFRAMES timeframe, string symbol, int period, ENUM_AP
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iRSI(symbol, timeframe, period, applied);
+  m_handle = ::iRSI(symbol, timeframe, period, applied);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -182,12 +206,12 @@ bool CiMa::Create(ENUM_TIMEFRAMES timeframe, string symbol, int period, ENUM_APP
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iMA(symbol, timeframe, period, ma_shift, ma_method, applied);
+  m_handle = ::iMA(symbol, timeframe, period, ma_shift, ma_method, applied);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -212,12 +236,12 @@ bool CiCci::Create(ENUM_TIMEFRAMES timeframe, string symbol, int period, ENUM_AP
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iCCI(symbol, timeframe, period, applied);
+  m_handle = ::iCCI(symbol, timeframe, period, applied);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -244,12 +268,12 @@ bool CiStocastic::Create(ENUM_TIMEFRAMES timeframe, string symbol, int kperiod, 
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iStochastic(symbol, timeframe, kperiod, dperiod, slowing, ma_method, stop_price);
+  m_handle = ::iStochastic(symbol, timeframe, kperiod, dperiod, slowing, ma_method, stop_price);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -273,12 +297,12 @@ bool CiVIDyA::Create(ENUM_TIMEFRAMES timeframe, string symbol, int cmo_period, i
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iVIDyA(symbol, timeframe, cmo_period, ema_period, ma_shift, applied);
+  m_handle = ::iVIDyA(symbol, timeframe, cmo_period, ema_period, ma_shift, applied);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -303,12 +327,12 @@ bool CiBands::Create(ENUM_TIMEFRAMES timeframe, string symbol, int bands_period,
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iBands(symbol, timeframe, bands_period, bands_shift, deviation, applied_price);
+  m_handle = ::iBands(symbol, timeframe, bands_period, bands_shift, deviation, applied_price);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -336,12 +360,12 @@ bool CiSuperTrend::Create(ENUM_TIMEFRAMES timeframe, string symbol, bool series,
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iCustom(symbol, timeframe, "::Super trend cts.ex5", cci_period);
+  m_handle = ::iCustom(symbol, timeframe, "::Super trend cts.ex5", cci_period);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -372,20 +396,17 @@ public:
                      CiVwapChange(void) { m_name = "VwapChange"; }
   bool               Create(ENUM_TIMEFRAMES timeframe, string symbol, VWAP_Period period, ENUM_APPLIED_PRICE applied, bool series, bool hide);
  };
-
-//+------------------------------------------------------------------+
-//|                                                                  |
 //+------------------------------------------------------------------+
 bool CiVwapChange::Create(ENUM_TIMEFRAMES timeframe, string symbol, VWAP_Period period, ENUM_APPLIED_PRICE applied, bool series, bool hide)
  {
 //---
   if(hide)
-    TesterHideIndicators(true);
+    ::TesterHideIndicators(true);
 
-  m_handle = iCustom(symbol, timeframe, "::VWAP.ex5", period, applied);
+  m_handle = ::iCustom(symbol, timeframe, "::VWAP.ex5", period, applied);
 
   if(hide)
-    TesterHideIndicators(false);
+    ::TesterHideIndicators(false);
 
 //---
   m_timeframe = timeframe;
@@ -394,5 +415,38 @@ bool CiVwapChange::Create(ENUM_TIMEFRAMES timeframe, string symbol, VWAP_Period 
 // Buffer[1] = sell
   return CiIndicatorSimple::Create(m_handle, series, 2);
  }
+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+class CiAD : public CiIndicatorSimple
+ {
+public:
+                     CiAD(void) { m_name = "Acomulation Distribution"; }
+                    ~CiAD(void) {}
+  bool               Create(ENUM_TIMEFRAMES timeframe, string symbol, ENUM_APPLIED_VOLUME applied, bool series, bool hide);
+ };
+
+//+------------------------------------------------------------------+
+bool CiAD::Create(ENUM_TIMEFRAMES timeframe, string symbol, ENUM_APPLIED_VOLUME applied, bool series, bool hide)
+ {
+//---
+  if(hide)
+    ::TesterHideIndicators(true);
+
+  m_handle = ::iAD(symbol, timeframe, applied);
+
+  if(hide)
+    ::TesterHideIndicators(false);
+
+//---
+  m_timeframe = timeframe;
+  m_symbol = symbol;
+// Buffer[0] = value
+  return CiIndicatorSimple::Create(m_handle, series, 1);
+ }
+
+
 #endif // MQLARTICLES_INDICATORSCTS_INDICATORSBASES_MQH
 //+------------------------------------------------------------------+
