@@ -37,7 +37,7 @@ public:
   inline int         OrdenesTotales() const { return total_ordenes; }
 
   //---
-  void               OnOrderDelete(const ROnOrderDelete& order) override;
+  void               OnOrderDelete(const ROrder& order) override;
   void               OnOpenClosePosition(const ROnOpenClosePosition &pos) override { }
  };
 
@@ -48,7 +48,7 @@ void COrderGestor::Initialize(ulong _ea_magic)
  }
 
 //+------------------------------------------------------------------+
-void COrderGestor::OnOrderDelete(const ROnOrderDelete &order) override
+void COrderGestor::OnOrderDelete(const ROrder &order) override
  {
   if(order.order_magic != ea_magic)
     return;
