@@ -132,21 +132,30 @@ struct pack(sizeof(double)) Position //remove pack if it increases to +4bytes
   ulong              magic; //magic number with which it was opened
   double             profit; //last recorded profit
   double             open_price; //opening price
-  double             firt_sl; //stop loss with which the position was opened, original sl (I put first because the StopLoss can be modified either by the user or by a bot)
-  double             first_tp; //first tp, original
+  double             sl; //stop loss
+  double             tp; //take profit
   datetime           open_time; //opening time
   ENUM_POSITION_TYPE type; //position type
  };
- 
-//--- Order
-struct pack(8) ROnOrderDelete
+
+// Notes: The tp/sl of the position is only modified if the CACCOUNT_STATUS_ACTIVE_ON_POSITION_MODIFIED statement is defined.
+// Otherwise, only the tp/sl stores the first registered tp and sl.
+
+//--- Order (OnOrderAdd | OnOrderUpdate | OnOrderDelete)
+struct ROrder
  {
-  ulong              order_magic; //magic number of the order
-  ulong              order_ticket; //order ticket
-  ENUM_ORDER_TYPE    order_type; //order type
-  ENUM_ORDER_STATE   order_state; //order state
+  double               order_open_price; // order open price
+  double               order_stop_loss; // order stop loss
+  double               order_take_profit; // order take profit
+  ulong                order_magic; //magic number of the order
+  ulong                order_ticket; //order ticket
+  datetime             order_time_expiration; // order expiration time
+  ENUM_ORDER_REASON    order_reason; // order reason
+  ENUM_ORDER_TYPE      order_type; //order type
+  ENUM_ORDER_STATE     order_state; //order state
+  ENUM_ORDER_TYPE_TIME order_type_time; // order type time
  };
- 
+
 //---
 struct ModifierOnOpenCloseStruct
  {
@@ -155,40 +164,40 @@ struct ModifierOnOpenCloseStruct
   double             deal_profit;     // Deal profit
   ENUM_DEAL_REASON   deal_reason;     // Deal reason
   ENUM_DEAL_ENTRY    deal_entry_type; // Deal entry type
-  
+
   //--- Magic number profit
   double             profit_diario;  // Daily profit regarding the magic number of (RiskManagement)
   double             profit_semanal; // Weekly profit regarding the magic number of (RiskManagement)
   double             profit_total;   // Total profit regarding the magic number of (RiskManagement)
   double             profit_mensual; // Monthly profit regarding the magic number of (RiskManagement)
- 
+
   //--- Open position info or closed position info
   Position           position;
  };
- 
+
 //---
 struct ROnOpenClosePosition
  {
   //--- Position
   Position           position;
-  
+
   //--- Deal
   ulong              deal_ticket; // Ticket
   double             deal_profit; // Profit
   ENUM_DEAL_REASON   deal_reason; // Reason
   ENUM_DEAL_ENTRY    deal_entry_type; // Entry type
-  
+
   //--- Account
   double             account_balance;        // Account balance
   double             account_profit_diario;  // Account daily profit
   double             account_profit_semanal; // Account weekly profit
   double             account_profit_total;   // Account total profit
   double             account_profit_mensual; // Account monthly profit
-  
+
   //--- Extra
   ulong              magic_number_closed; // Magic number at position close
  };
- 
+
 //--- Loss/Profit
 struct Loss_Profit
  {
@@ -197,21 +206,21 @@ struct Loss_Profit
   ENUM_RISK_CALCULATION_MODE mode_calculation_risk; //risk calculation method
   ENUM_APPLIED_PERCENTAGES percentage_applied_to; //percentage applied to
  };
- 
+
 //--- Dynamic gmlpo/ Dynamic risk per operation
 struct Dynamic_LossProfit
  {
   double             balance_to_activate_the_risk[];
   double             risk_to_be_adjusted[];
  };
- 
+
 //---
 struct RiskParams
  {
   ENUM_MODE_RISK_MANAGEMENT mode;
   MqlParam           params[];
  };
- 
+
 //---
 struct ModfierInitInfo
  {
