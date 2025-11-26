@@ -85,14 +85,6 @@ enum ENUM_GET_LOT
   GET_LOT_BY_STOPLOSS_AND_RISK_PER_OPERATION //Obtain and adjust the lot through the risk per operation and stop loss respectively.
  };
 
-//--- Mode to check if a maximum loss or gain has been exceeded
-enum MODE_SUPERATE
- {
-  EQUITY = 0, //Only Equity
-  CLOSE_POSITION = 1, //Only for closed positions
-  CLOSE_POSITION_AND_EQUITY = 2//Closed positions and equity
- };
-
 //--- Enumeration of the types of dynamic operational risk
 enum ENUM_OF_DYNAMIC_MODES_OF_GMLPO
  {
@@ -135,6 +127,7 @@ struct pack(sizeof(double)) Position //remove pack if it increases to +4bytes
   double             sl; //stop loss
   double             tp; //take profit
   datetime           open_time; //opening time
+  double             volume;
   ENUM_POSITION_TYPE type; //position type
  };
 
@@ -202,8 +195,7 @@ struct ROnOpenClosePosition
 struct Loss_Profit
  {
   double             value; //value
-  double             assigned_percentage; //percentage to apply
-  ENUM_RISK_CALCULATION_MODE mode_calculation_risk; //risk calculation method
+  double             calculation_value; //calculation value (percentage or money)
   ENUM_APPLIED_PERCENTAGES percentage_applied_to; //percentage applied to
  };
 
