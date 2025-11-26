@@ -16,7 +16,7 @@ enum ENUM_TP_SL_STYLE
   POINT = 1 //Fixed Points
  };
 
-#define MORE_INFO_LOSS_PROFIT_DEFINE
+
 #include  "..\\..\\..\\PosMgmt\\Breakeven.mqh"
 #include  "..\\..\\..\\PosMgmt\\Partials.mqh"
 CTrade tradep;
