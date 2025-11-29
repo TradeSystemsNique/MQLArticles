@@ -11,7 +11,7 @@ This repository contains the source code from articles published on MQL5.com by 
 |---------|-------|-------------|
 | **Defines**  | - MoreInfo.md<br> - MoreStrict.md  | Md files, which contain defines that can be defined, their definition implies "activating" or increasing the prints that certain classes that make up the repository do.   |
 | **Examples** | -**GUI/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Risk_Management_Panel.mq5<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-**BE/** <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Ea.mq5<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Main.mqh<br> -**Test/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Get_Lot_By_Risk_Per_Trade_and_SL.mq5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Get_Sl_by_risk_per_operation_and_lot.mq5<br>| Practical examples of using the Risk Management (RM) library. |
-| **Images** | - breakeven_manager.png<br> - lot_size_calculator.png<br> - ob_indicator.png | Screenshots of the repository examples.     |
+| **Images** | - breakeven_manager.png<br> - lot_size_calculator.png<br> - ob_ind.png | Screenshots of the repository examples.     |
 | **IndicatorsCts** | - IndicatorsBases.mqh | Wrapper library for implementing simple indicators using classes. |
 | **Ob** | - **Bots/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Art19682/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Ea.mq5<br><br>- **Indicator/**<br>&nbsp;&nbsp;&nbsp;&nbsp;- Main.mqh<br>&nbsp;&nbsp;&nbsp;&nbsp;- OrderBlockIndPart2.mq5 | Includes the Order Blocks indicator, as well as the Expert Advisors used as examples in other articles published by the author (nique_372). |
 | **PosMgmt** | - **ConditionalPartial/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  **Base/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - Base.mqh<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Defines.mqh<br>- Breakeven.mqh<br>- Partials.mqh | Contains libraries for position management:<br>- Breakeven<br>- Partial closure<br>- Conditional partial closure. |
@@ -70,6 +70,8 @@ This repository contains the source code from articles published on MQL5.com by 
 
 
 - Ob\\Indicator\\OrderBlockIndPart2.mq5
+
+![Imagen](./Images/ob_ind.png)
 
 
 
