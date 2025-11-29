@@ -71,8 +71,6 @@ This repository contains the source code from articles published on MQL5.com by 
 
 - Ob\\Indicator\\OrderBlockIndPart2.mq5
 
-![Imagen](./Images/ob_indicator.png)
-
 
 
 ## Installation Methods
